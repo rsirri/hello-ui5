@@ -1,12 +1,13 @@
 <mvc:View controllerName="helloui5.controller.View1"
     xmlns:mvc="sap.ui.core.mvc"
-    xmlns="sap.m">
+    xmlns="sap.m"
+    xmlns:f="sap.ui.layout.form">
     <Page id="page" title="{i18n>salesTitle}" showHeader="true">
         
         <!-- <Text text="Hello from SAP UI5!" />
         <Button text="Click me" press=".onButtonPress" /> -->
 
-        <headerContent>
+        <!-- <headerContent>
             <Button text="Edit" press=".onEditPress"></Button>
         </headerContent>
 
@@ -28,6 +29,38 @@
 
         </f:content>
 
-        </f:SimpleForm>
+        </f:SimpleForm> -->
+
+        <Table id="ordersTable" items="{/orders}">
+            <headerToolbar>
+                <Toolbar>
+                    <Title text="Sales Order List"></Title>
+                    <ToolbarSpacer />
+                    <SearchField placeholder="search order..." width="30%" search=".onSearch"></SearchField>
+                </Toolbar>
+            </headerToolbar>
+
+            <columns>
+                <Column><Text text="Order No" /></Column>
+                <Column><Text text="Customer"></Text></Column>
+                <Column><Text text="Status"></Text></Column>
+                <Column><Text text="Net Value"></Text></Column>
+                <Column><Text text="Currency"></Text></Column>
+            </columns>
+
+            <items>
+                <ColumnListItem >
+                    <cells>
+                        <Text text="{orderNumber}" />
+                        <Text text="{customer}" />
+                        <Text text="{status}" />
+                        <Text text="{netValue}" />
+                        <Text text="{currency}" />
+                    </cells>
+                </ColumnListItem>
+            </items>
+
+        </Table>
+
     </Page>
 </mvc:View>
