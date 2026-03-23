@@ -1,7 +1,7 @@
 import Controller from "sap/ui/core/mvc/Controller";
 import MessageToast from "sap/m/MessageToast";
 import JSONModel from "sap/ui/model/json/JSONModel";
-
+// My first UI5 controller
 /**
  * @namespace helloui5.controller
  */
