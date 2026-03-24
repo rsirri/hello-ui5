@@ -1,0 +1,31 @@
+<mvc:View controllerName="helloui5.controller.View2"
+            xmlns:mvc="sap.ui.core.mvc"
+            xmlns="sap.m"
+            xmlns:f="sap.ui.layout.form">
+
+    <Page id="view2Page" title="{i18n>page2Title}" showNavButton="true" navButtonPress=".onNavBack">
+
+        <f:SimpleForm xmlns:f="sap.ui.layout.form" editable="false" layout="ResponsiveGridLayout" title ="Order Information">
+
+            <f:content>
+                <Label text="Order Number"/>
+                <Text text="{/orderNumber}"/>
+                
+                <Label text="Customer"/>
+                <Text text="{/customer}"/>
+
+                <Label text="Status"/>
+                <Text text="{/status}"/>
+
+                <Label text="Net Value"/>
+                <Text text="{/netValue}"/>
+
+                <Label text="Currency"/>
+                <Text text="{/currency}"/>
+            </f:content>
+
+        </f:SimpleForm>
+
+    </Page>
+
+</mvc:View>

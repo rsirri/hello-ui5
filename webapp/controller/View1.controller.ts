@@ -7,6 +7,8 @@ import Filter from "sap/ui/model/Filter";
 import FilterOperator from "sap/ui/model/FilterOperator";
 import ListBinding from "sap/ui/model/ListBinding";
 import Event from "sap/ui/base/Event";
+import ColumnListItem from "sap/m/ColumnListItem";
+import UIComponent from "sap/ui/core/UIComponent";
 // My first UI5 controller
 /**
  * @namespace helloui5.controller
@@ -121,6 +123,32 @@ export default class View1 extends Controller {
         } else {
             binding.filter([]);
         }
+
+    }
+
+    // ===========================
+    // SALES ORDER TABLE ROW PRESS
+    //============================
+    onRowPress(event: Event): void {
+    //     const row = (event as any).getParameter("listItem") as ColumnListItem;
+    //     const ctx = row.getBindingContext();
+    //     const path = ctx?.getPath();
+    //     // const orderNumber = ctx?.getProperty("orderNumber");
+
+    //     const router = (this.getOwnerComponent() as UIComponent).getRouter();
+    //     // router.navTo("RouteView2", { orderNumber: orderNumber });
+    //     router.navTo("RouteView2", {paht: encodeURIComponent(path!) });
+
+    
+        const row = (event as any).getParameter("listItem") as ColumnListItem;
+        const ctx = row.getBindingContext();
+        const order = ctx?.getObject();  // gets entire row object!
+
+        // store in component model
+        const component = this.getOwnerComponent() as UIComponent;
+        component.setModel(new JSONModel(order), "selectedOrder");
+
+        component.getRouter().navTo("RouteView2");
 
     }
 

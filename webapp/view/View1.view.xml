@@ -31,7 +31,7 @@
 
         </f:SimpleForm> -->
 
-        <Table id="ordersTable" items="{/orders}">
+        <Table id="ordersTable" items="{/orders}" mode="SingleSelectMaster" itemPress=".onRowPress">
             <headerToolbar>
                 <Toolbar>
                     <Title text="Sales Order List"></Title>
@@ -49,7 +49,7 @@
             </columns>
 
             <items>
-                <ColumnListItem >
+                <ColumnListItem type="Active">
                     <cells>
                         <Text text="{orderNumber}" />
                         <Text text="{customer}" />
