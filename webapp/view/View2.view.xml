@@ -5,6 +5,13 @@
 
     <Page id="view2Page" title="{i18n>page2Title}" showNavButton="true" navButtonPress=".onNavBack">
 
+        <ObjectHeader title="{/orderNumber}" number="{/netValue}" numberUnit="{/currency}" intro="Sales Order">
+            <attributes>
+                <ObjectAttribute title="Customer" text="{/customer}" ></ObjectAttribute>
+                <ObjectAttribute title="Status" text="{/status}"></ObjectAttribute>
+            </attributes>
+        </ObjectHeader>    
+
         <f:SimpleForm xmlns:f="sap.ui.layout.form" editable="false" layout="ResponsiveGridLayout" title ="Order Information">
 
             <f:content>
