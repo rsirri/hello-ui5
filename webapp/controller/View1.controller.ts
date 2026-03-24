@@ -34,47 +34,116 @@ export default class View1 extends Controller {
             orders: [
                 {
                     orderNumber: "4500012345",
-                customer: "1000456",
-                status: "Open",
-                netValue: 12500,
-                currency: "USD"
-            },
-            {
-                orderNumber: "4500012346",
-                customer: "1000789",
-                status: "In Process",
-                netValue: 8420,
-                currency: "USD"
-            },
-            {
-                orderNumber: "4500012347",
-                customer: "1000234",
-                status: "Open",
-                netValue: 15890,
-                currency: "EUR"
-            },
-            {
-                orderNumber: "4500012348",
-                customer: "1000678",
-                status: "Completed",
-                netValue: 3920,
-                currency: "USD"
-            },
-            {
-                orderNumber: "4500012349",
-                customer: "1000451",
-                status: "Open",
-                netValue: 21950,
-                currency: "EUR"
-            },
-            {
-                orderNumber: "4500012350",
-                customer: "1000678",
-                status: "Cancelled",
-                netValue: 14562,
-                currency: "EUR"
-            },
-        ]
+                    customer: "1000456",
+                    status: "Open",
+                    netValue: 12500,
+                    currency: "USD",
+
+                    items: [
+                        {
+                            itemNumber: "10",
+                            material: "MAT-1001",
+                            description: "Laptop",
+                            quantity: 2,
+                            price: 2000,
+                            itemValue: 4000
+                        },
+                        {
+                            itemNumber: "20",
+                            material: "MAT-2001",
+                            description: "Mouse",
+                            quantity: 5,
+                            price: 50,
+                            itemValue: 250
+                        }
+                    ],
+
+                    shipping: {
+                        shippingPoint: "SP01",
+                        carrier: "FedEx",
+                        trackingNumber: "FDX123456789",
+                        deliveryDate: "2026-03-28",
+                        address: {
+                            street: "120 Peachtree St",
+                            city: "Atlanta",
+                            country: "US",
+                            zip: "30303"
+                        }
+                    }
+                },
+
+                {
+                    orderNumber: "4500012346",
+                    customer: "1000789",
+                    status: "In Process",
+                    netValue: 8420,
+                    currency: "USD",
+
+                    items: [
+                        {
+                            itemNumber: "10",
+                            material: "MAT-3001",
+                            description: "Monitor",
+                            quantity: 3,
+                            price: 300,
+                            itemValue: 900
+                        }
+                    ],
+
+                    shipping: {
+                        shippingPoint: "SP02",
+                        carrier: "UPS",
+                        trackingNumber: "UPS987654321",
+                        deliveryDate: "2026-03-30",
+                        address: {
+                            street: "500 Market St",
+                            city: "San Francisco",
+                            country: "US",
+                            zip: "94105"
+                        }
+                    }
+                },
+
+                {
+                    orderNumber: "4500012347",
+                    customer: "1000234",
+                    status: "Open",
+                    netValue: 15890,
+                    currency: "EUR",
+
+                    items: [
+                        {
+                            itemNumber: "10",
+                            material: "MAT-4001",
+                            description: "Keyboard",
+                            quantity: 10,
+                            price: 40,
+                            itemValue: 400
+                        },
+                        {
+                            itemNumber: "20",
+                            material: "MAT-5001",
+                            description: "Headset",
+                            quantity: 4,
+                            price: 120,
+                            itemValue: 480
+                        }
+                    ],
+
+                    shipping: {
+                        shippingPoint: "SP03",
+                        carrier: "DHL",
+                        trackingNumber: "DHL567890123",
+                        deliveryDate: "2026-04-02",
+                        address: {
+                            street: "Alexanderplatz 1",
+                            city: "Berlin",
+                            country: "DE",
+                            zip: "10178"
+                        }
+                    }
+                }
+            ]
         };
 
         // Create Model
@@ -147,15 +216,33 @@ export default class View1 extends Controller {
     //     router.navTo("RouteView2", {paht: encodeURIComponent(path!) });
 
     
+        // const row = (event as any).getParameter("listItem") as ColumnListItem;
+        // const ctx = row.getBindingContext();
+        // const order = ctx?.getObject();  // gets entire row object!
+
+        // // store in component model
+        // const component = this.getOwnerComponent() as UIComponent;
+        // component.setModel(new JSONModel(order), "selectedOrder");
+
+        // component.getRouter().navTo("RouteView2");
+
         const row = (event as any).getParameter("listItem") as ColumnListItem;
-        const ctx = row.getBindingContext();
-        const order = ctx?.getObject();  // gets entire row object!
+        const selectedRow = row.getBindingContext();
 
-        // store in component model
-        const component = this.getOwnerComponent() as UIComponent;
-        component.setModel(new JSONModel(order), "selectedOrder");
+        const orderData = {
+            orderNumber: selectedRow?.getProperty("orderNumber"),
+            customer:    selectedRow?.getProperty("customer"),
+            status:      selectedRow?.getProperty("status"),
+            netValue:    selectedRow?.getProperty("netValue"),
+            currency:    selectedRow?.getProperty("currency"),
+            items:       selectedRow?.getProperty("items"),
+            shipping:    selectedRow?.getProperty("shipping")
+        };
 
-        component.getRouter().navTo("RouteView2");
+        const jsonModel = new JSONModel();
+        jsonModel.setData(orderData);
+        (this.getOwnerComponent() as UIComponent).setModel(jsonModel, "selectedOrder");
+        (this.getOwnerComponent() as UIComponent).getRouter().navTo("RouteView2");
 
     }
 

@@ -21,8 +21,8 @@
                 <ObjectStatus title="Status" text="{/status}" state="{ path: '/status', formatter: '.formatter.statusState'}" />
             </statuses>
         </ObjectHeader>    
-
-        <f:SimpleForm xmlns:f="sap.ui.layout.form" editable="false" layout="ResponsiveGridLayout" title ="Order Information">
+        
+        <!-- <f:SimpleForm xmlns:f="sap.ui.layout.form" editable="false" layout="ResponsiveGridLayout" title ="Order Information">
 
             <f:content>
                 <Label text="Order Number"/>
@@ -31,24 +31,105 @@
                 <Label text="Customer"/>
                 <Text text="{/customer}"/>
 
-                <Label text="Status"/>
+                <Label text="Status"/> -->
                 <!-- <Text text="{/status}"/>  -->
-                <ObjectStatus text="{/status}" state="{ path: '/status', formatter: '.formatter.statusState'}" ></ObjectStatus>
+                <!-- <ObjectStatus text="{/status}" state="{ path: '/status', formatter: '.formatter.statusState'}" ></ObjectStatus>
 
                 <Label text="Net Value"/>
-                <ObjectStatus
-                    text="{/netValue} {/currency}"
-                    state="{
-                        path: '/netValue',
-                        formatter: '.formatter.valueState'
-                    }"/>
+                <ObjectStatus text="{/netValue} {/currency}" state="{ path: '/netValue', formatter: '.formatter.valueState' }"/> -->
                 <!-- <Text text="{/netValue}"/> -->
 
                 <!-- <Label text="Currency"/>
                 <Text text="{/currency}"/> -->
-            </f:content>
+            <!-- </f:content>
 
-        </f:SimpleForm>
+        </f:SimpleForm> -->
+
+        <!-- IconTabBar - 3 tabs-->
+        <IconTabBar id="idIconTabbar">
+
+            <items>
+                <!-- Tab 1 - Order Info -->
+                <IconTabFilter icon="sap-icon://detail-view" text="Order Info">
+                    <f:SimpleForm xmlns:f="sap.ui.layout.form" editable="false" layout="ResponsiveGridLayout">
+                        <f:content>
+                            <Label text="Order Number"/>
+                            <Text text="{/orderNumber}"/>
+
+                            <Label text="Customer"/>
+                            <Text text="{/customer}"/>
+
+                            <Label text="Status"/>
+                            <ObjectStatus
+                                text="{/status}"
+                                state="{path: '/status', formatter: '.formatter.statusState'}"/>
+
+                            <Label text="Net Value"/>
+                            <Text text="{/netValue} {/currency}"/>
+                        </f:content>
+                    </f:SimpleForm>
+                </IconTabFilter>
+
+                <!-- Tab 2 - Items -->
+                <IconTabFilter icon="sap-icon://table-view" text="Items">
+                    <Table items="{/items}">
+                        <columns>
+                            <Column><Text text="Item"></Text></Column>
+                            <Column><Text text="Material"></Text></Column>
+                            <Column><Text text="Description"></Text></Column>
+                            <Column><Text text="Quantity"></Text></Column>
+                            <Column><Text text="Price"></Text></Column>
+                            <Column><Text text="Value"></Text></Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem >
+                                <cells>
+                                    <Text text="{itemNumber}"></Text>
+                                    <Text text="{material}"></Text>
+                                    <Text text="{description}"></Text>
+                                    <Text text="{quantity}"></Text>
+                                    <Text text="{price}"></Text>
+                                    <Text text="{itemValue}"></Text>
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </IconTabFilter>
+
+                <!-- Tab 3 - Shipping -->
+                <IconTabFilter icon="sap-icon://shipping-status" text="Shipping">
+                    <f:SimpleForm xmlns:f="sap.ui.layout.form" editable="false" layout="ResponsiveGridLayout">
+                        <f:content>
+                            <Label text="Shipping point"></Label>
+                            <Text text="{/shipping/shippingPoint}"/>
+
+                        <Label text="Carrier"/>
+                        <Text text="{/shipping/carrier}"/>
+
+                        <Label text="Tracking No"/>
+                        <Text text="{/shipping/trackingNumber}"/>
+
+                        <Label text="Delivery Date"/>
+                        <Text text="{/shipping/deliveryDate}"/>
+
+                        <Label text="Street"/>
+                        <Text text="{/shipping/address/street}"/>
+
+                        <Label text="City"/>
+                        <Text text="{/shipping/address/city}"/>
+
+                        <Label text="Country"/>
+                        <Text text="{/shipping/address/country}"/>
+
+                        <Label text="ZIP"/>
+                        <Text text="{/shipping/address/zip}"/>
+                        </f:content>
+                    </f:SimpleForm>
+                </IconTabFilter>
+
+            </items>
+
+        </IconTabBar>
 
     </Page>
 
