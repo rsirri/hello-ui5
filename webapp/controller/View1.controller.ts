@@ -66,7 +66,14 @@ export default class View1 extends Controller {
                 status: "Open",
                 netValue: 21950,
                 currency: "EUR"
-            }
+            },
+            {
+                orderNumber: "4500012350",
+                customer: "1000678",
+                status: "Cancelled",
+                netValue: 14562,
+                currency: "EUR"
+            },
         ]
         };
 

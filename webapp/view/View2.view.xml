@@ -5,11 +5,21 @@
 
     <Page id="view2Page" title="{i18n>page2Title}" showNavButton="true" navButtonPress=".onNavBack">
 
-        <ObjectHeader title="{/orderNumber}" number="{/netValue}" numberUnit="{/currency}" intro="Sales Order">
+        <ObjectHeader title="{/orderNumber}" number="{/netValue}" 
+                    numberUnit="{/currency}" 
+                    numberState="{
+                        path: '/netValue',
+                        formatter: '.formatter.valueState'
+                    }"
+                    intro="Sales Order">
             <attributes>
                 <ObjectAttribute title="Customer" text="{/customer}" ></ObjectAttribute>
-                <ObjectAttribute title="Status" text="{/status}"></ObjectAttribute>
+                <ObjectAttribute title="Status" text="{/status}" active="true"></ObjectAttribute>
             </attributes>
+
+            <statuses>
+                <ObjectStatus title="Status" text="{/status}" state="{ path: '/status', formatter: '.formatter.statusState'}" />
+            </statuses>
         </ObjectHeader>    
 
         <f:SimpleForm xmlns:f="sap.ui.layout.form" editable="false" layout="ResponsiveGridLayout" title ="Order Information">
@@ -22,13 +32,20 @@
                 <Text text="{/customer}"/>
 
                 <Label text="Status"/>
-                <Text text="{/status}"/>
+                <!-- <Text text="{/status}"/>  -->
+                <ObjectStatus text="{/status}" state="{ path: '/status', formatter: '.formatter.statusState'}" ></ObjectStatus>
 
                 <Label text="Net Value"/>
-                <Text text="{/netValue}"/>
+                <ObjectStatus
+                    text="{/netValue} {/currency}"
+                    state="{
+                        path: '/netValue',
+                        formatter: '.formatter.valueState'
+                    }"/>
+                <!-- <Text text="{/netValue}"/> -->
 
-                <Label text="Currency"/>
-                <Text text="{/currency}"/>
+                <!-- <Label text="Currency"/>
+                <Text text="{/currency}"/> -->
             </f:content>
 
         </f:SimpleForm>

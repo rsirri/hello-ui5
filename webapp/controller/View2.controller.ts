@@ -1,8 +1,11 @@
 import Controller from "sap/ui/core/mvc/Controller";
 import UIComponent from "sap/ui/core/UIComponent";
 import JSONModel from "sap/ui/model/json/JSONModel";
+import formatter from "helloui5/model/formatter";
 
 export default class View2 extends Controller {
+
+    formatter = formatter;
 
     // ==========================
     // INITIALIZE FUNCTION
@@ -41,6 +44,16 @@ export default class View2 extends Controller {
     onNavBack(): void {
         const router = (this.getOwnerComponent() as UIComponent).getRouter();
         router.navTo("RouteView1");
+    }
+
+    getStatusState(status: string): string {
+        switch(status) {
+            case "Open": return "Information";
+            case "In Process": return "Warning";
+            case "Completed":  return "Success";
+            case "Cancelled":  return "Error";
+            default:           return "None";
+        }
     }
 
 }
